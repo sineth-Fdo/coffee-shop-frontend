@@ -34,7 +34,7 @@ const Page = () => {
   }, []);
 
   return (
-    <div>
+    <div className="pt-40">
       <h1>Login page</h1>
       <form onSubmit={handleSubmit}>
         <input

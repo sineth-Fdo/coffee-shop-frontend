@@ -10,7 +10,7 @@ export const navList : INavList[] = [
     },
     {
         title: "Shop",
-        link: "/home"
+        link: "/shop"
     },
     {
         title: "Menu",
