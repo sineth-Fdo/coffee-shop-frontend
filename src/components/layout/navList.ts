@@ -14,7 +14,7 @@ export const navList : INavList[] = [
     },
     {
         title: "Menu",
-        link: "/home"
+        link: "/menu"
     },
     {
         title: "Contact us",

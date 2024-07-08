@@ -4,20 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Container from '@/src/components/layout/container';
 import Button from '@/src/components/ui/button';
+import MainImage from '@/src/components/ui/mainImage';
 
 const Page = () => {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <div className="w-full">
@@ -49,17 +38,7 @@ const Page = () => {
               </div>
           </div>
         </Container>
-        <Image
-          alt="coffee banner"
-          src="/assets/main-bg.png"
-          objectFit="cover"
-          layout="fill"
-          quality={100}
-          style={{
-            transform: `scale(${1 + scrollY / 3000})`,
-            transition: 'transform 1s ease-out',
-          }}
-        />
+        <MainImage alt="main-image" src="/assets/main-bg.png" />
       </div>
 
       <Container>
