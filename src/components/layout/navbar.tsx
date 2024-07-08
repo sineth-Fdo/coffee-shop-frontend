@@ -2,19 +2,35 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../ui/button";
 import NavigationMenu from "./NavMenu";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hideNavbar, setHideNavbar] = useState(false);
 
   const router = useRouter();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 800) {
+        setHideNavbar(true);
+      } else {
+        setHideNavbar(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div>
-      <nav className="bg-[#00000085] fixed w-full z-50 top-0 shadow ">
+      <nav className={`bg-[#00000085] fixed w-screen z-50 top-0 shadow transition duration-300 ${hideNavbar ? 'opacity-0' : 'opacity-100'}`}>
         <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-5 mb-5 py-2">
           <div className="pl-4 flex items-center mr-1">
             <Link href="/home">
@@ -37,8 +53,8 @@ const Navbar = () => {
               </Link>
               <Button
                 name="Login"
-                className="hover:bg-[#795b30] hover:text-[#ffe6bf] transition duration-500 ease-in-out w-20 h-8"
-               
+                className="hover:bg-[#795b30] bg-[#bd914e] hover:text-[#ffe6bf] transition duration-500 ease-in-out w-20 h-8"
+                onClick={() => router.push("/login")}
               />
             </div>
           </div>

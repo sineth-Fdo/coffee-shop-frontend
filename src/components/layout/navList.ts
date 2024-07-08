@@ -9,15 +9,15 @@ export const navList : INavList[] = [
         link: "/home"
     },
     {
-        title: "About",
-        link: "/login"
+        title: "Shop",
+        link: "/home"
     },
     {
         title: "Menu",
         link: "/home"
     },
     {
-        title: "Contact",
+        title: "Contact us",
         link: "/home"
     },
 
