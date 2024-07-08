@@ -5,11 +5,10 @@ import React from 'react'
 import MainImageText from '../_components/MainImageText'
 
 const Page = () => {
-
   return (
     <div>
-        <div className="relative w-full h-screen overflow-hidden flex justify-center items-center">
-                <MainImageText name="SHOP" />
+      <div className="relative w-full h-screen overflow-hidden flex justify-center items-center">
+                <MainImageText name="MENU" />
                 <MainImage alt="shop-main-image" src="/assets/main2.jpg" />
             <div className="absolute inset-0 bg-black bg-opacity-50 "></div>
         </div>
