@@ -24,7 +24,7 @@ const NavMenu = (props:any) => {
             ))}
             <Button 
                 name = "Login"
-                className="hover:bg-[#795b30] hover:text-[#ffe6bf] transition duration-500 ease-in-out w-40 h-8"
+                className="hover:bg-[#795b30] bg-[#bd914e] hover:text-[#ffe6bf] transition duration-500 ease-in-out w-40 h-8"
 
                 />
         </div>
