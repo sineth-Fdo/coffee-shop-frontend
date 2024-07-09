@@ -1,8 +1,10 @@
+import Cookies from "js-cookie";
+
 interface INavList {
     title: string,
     link: string
 }
-const role = localStorage.getItem("role");
+const role = Cookies.get("role");
 
 export const navList : INavList[] = [
     {

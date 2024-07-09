@@ -13,7 +13,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hideNavbar, setHideNavbar] = useState(false);
   const [token, setToken] = useState("");
-  const [reloadCount, setReloadCount] = useState(0);
+
 
   const router = useRouter();
 
@@ -22,13 +22,6 @@ const Navbar = () => {
     const CookeToken = Cookies.get("token");
     setToken(CookeToken as string);
 
-    
-
-    if (reloadCount === 0) {
-      setReloadCount(1);
-    }else {
-      window.location.reload();
-    }
     const handleScroll = () => {
       if (window.scrollY >= 800) {
         setHideNavbar(true);
@@ -66,13 +59,13 @@ const Navbar = () => {
               <div className="flex items-center justify-center">
               
               {
-                token && localStorage.getItem("role") === "customer" ? (
+                token && Cookies.get("role") === "customer" ? (
                   <Link href="/cart">
                     <IoCartOutline 
                       className="text-white text-2xl mr-8 hover:text-[#ffffffb0] hover:text-md transition duration-500 ease-in-out"
                     />
                 </Link>
-                ) : token && localStorage.getItem("role") === "admin" ? (
+                ) : token && Cookies.get("role") === "admin" ? (
                   null
                 ) : (
                   <Link href= '/register'>
@@ -92,7 +85,7 @@ const Navbar = () => {
                   onClick={() =>{
                     if(token){
                       Cookies.remove("token");
-                      localStorage.removeItem("role");
+                      Cookies.remove("role");
                       router.push("/login");
                     }else{
                       router.push("/login");

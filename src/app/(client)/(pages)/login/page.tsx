@@ -19,7 +19,7 @@ const Page = () => {
     if (res.ok) {
       const data = await res.json();
       Cookies.set("token", data.token, { expires: 10 });
-      localStorage.setItem("role", data.user.role);
+      Cookies.set("role", data.user.role, { expires: 10 });
       console.log("Login successful");
 
       if (data.user.role === "admin") {
@@ -37,7 +37,7 @@ const Page = () => {
 
   useEffect(() => {
     const token = Cookies.get("token");
-    const role = localStorage.getItem("role");
+    const role = Cookies.get("role");
     if (!token) {
       console.log("Not authenticated");
       router.push("/login");
@@ -49,7 +49,7 @@ const Page = () => {
         router.push("/home");
       }
     }
-  }, []);
+  },[]);
 
   return (
     <div className="pt-40">
