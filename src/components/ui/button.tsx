@@ -17,7 +17,7 @@ const Button = (props: IButtonProps) => {
 
 
   return (
-    <div className= {`flex items-center justify-center rounded-[100px] active:bg-[#000] active:text-[#fff] text-[#fff] hover:text-[#fff]  transition duration-500 ease-in-out ${className}`}>
+    <div className= {`flex items-center justify-center rounded-[100px] active:bg-[#000] active:text-[#fff]  transition duration-500 ease-in-out ${className}`}>
       <button
         onClick={onClick}
       >
