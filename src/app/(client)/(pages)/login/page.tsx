@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 
 import Cookies from "js-cookie";
 import { loginUser } from "@/src/api/auth/authApi";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -17,19 +18,36 @@ const Page = () => {
 
     if (res.ok) {
       const data = await res.json();
-      console.log(data);
-      Cookies.set("token", data, { expires: 10 });
-      alert("Login successful");
+      Cookies.set("token", data.token, { expires: 10 });
+      localStorage.setItem("role", data.user.role);
+      console.log("Login successful");
+
+      if (data.user.role === "admin") {
+        router.push("/dashboard");
+      }else if (data.user.role === "customer") {
+        router.push("/home");
+      }
+
     } else {
       alert("Login failed");
     }
   };
 
+  
+
   useEffect(() => {
     const token = Cookies.get("token");
+    const role = localStorage.getItem("role");
     if (!token) {
-      alert("Not authenticated");
+      console.log("Not authenticated");
+      router.push("/login");
     } else {
+
+      if (role === "admin") {
+        router.push("/dashboard");
+      } else if (role === "customer") {
+        router.push("/home");
+      }
     }
   }, []);
 
