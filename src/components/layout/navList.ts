@@ -1,24 +1,27 @@
+import Cookies from "js-cookie";
+
 interface INavList {
     title: string,
     link: string
 }
+const role = Cookies.get("role");
 
 export const navList : INavList[] = [
     {
-        title: "Home",
-        link: "/home"
+        title: `${role === "admin" ? "Dashboard" : "Home"}`,
+        link: `${role === "admin" ? "/dashboard" : "/home"}`
     },
     {
-        title: "Shop",
-        link: "/shop"
+        title: `${role === "admin" ? "Orders" : "shop"}`,
+        link: `${role === "admin" ? "/orders" : "/shop"}`
     },
     {
-        title: "Menu",
-        link: "/menu"
+        title: `${role === "admin" ? "" : "Menu"}`,
+        link:  `${role === "admin" ? "" : "/home"}`
     },
     {
-        title: "Contact us",
-        link: "/home"
+        title: `${role === "admin" ? "" : "Contact"}`,
+        link: `${role === "admin" ? "" : "/contact"}`
     },
 
 ]

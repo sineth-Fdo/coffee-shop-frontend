@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Container from '@/src/components/layout/container';
 import Button from '@/src/components/ui/button';
@@ -8,7 +8,7 @@ import MainImage from '@/src/components/ui/mainImage';
 import CoffeeCup from './_components/CoffeeCup';
 
 const Page = () => {
-
+  
   return (
     <div className="w-full">
       <div className="relative w-[100%] h-screen overflow-hidden">
