@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Button from "@/src/components/ui/button";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().min(2).max(50).email(),
@@ -71,12 +72,12 @@ const LoginForm = () => {
   };
 
   // styles
-  const inputStyle = "border border-gray-300 rounded-md w-[100%]";
+  const inputStyle = " border-gray-300 rounded-md w-[100%]";
   const labelStyle = "text-sm font-semibold text-gray-600";
 
 
   return (
-    <div className="border w-[100%] h-[100%] flex flex-col px-10 sm:px-20 lg:px-40 xl:px-60 justify-center">
+    <div className=" w-[100%] h-[100%] flex flex-col px-10 sm:px-20 lg:px-40 xl:px-60 justify-center">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <h1 className="text-3xl font-semibold">Login</h1>
@@ -113,7 +114,10 @@ const LoginForm = () => {
                     />
                 </form>
             </Form>
-
+              
+            <Link href={"/register"}>
+              <h1 className="text-sm font-semibold text-[#0063eeb8] hover:text-[#0063ee62] cursor-pointer mt-5">Don&apos;t have an account ?</h1>
+            </Link>
    
     </div>
   );
