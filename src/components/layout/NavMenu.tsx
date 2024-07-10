@@ -3,8 +3,13 @@ import React from 'react'
 import Link from 'next/link'
 import { navList } from './navList'
 import Button from '../ui/button'
+import Cookies from "js-cookie";
+import { useRouter } from 'next/navigation'
 
 const NavMenu = (props:any) => {
+  const token = Cookies.get("token");
+  const router = useRouter();
+
   return (
     <>
       {props.navName === "big" ? (
@@ -22,10 +27,19 @@ const NavMenu = (props:any) => {
                     <h1 className="text-white text-2xl my-5">{item.title}</h1>
                 </Link>
             ))}
+            
             <Button 
-                name = "Login"
+                name = {token ? "Logout" : "Login"}
                 className="hover:bg-[#795b30] bg-[#bd914e] hover:text-[#ffe6bf] transition duration-500 ease-in-out w-40 h-8"
-
+                onClick={() => {
+                    if (token) {
+                        Cookies.remove("token");
+                        Cookies.remove("role");
+                        router.push("/login");
+                    } else {
+                        router.push("/home");
+                    }
+                }}
                 />
         </div>
       ) : null}
