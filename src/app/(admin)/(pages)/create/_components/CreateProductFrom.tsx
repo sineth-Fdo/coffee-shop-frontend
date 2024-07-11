@@ -1,3 +1,5 @@
+'use client';
+
 import Cookies from "js-cookie";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
