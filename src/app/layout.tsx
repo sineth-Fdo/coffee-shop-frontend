@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { poppins } from "../styles/fonts";
 import "../styles/globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import Navbar from "../components/layout/navbar";
 import Footer from "../components/layout/footer/Footer";
@@ -19,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} scroll-smooth`}>
-        
+      <SpeedInsights/>
         <Navbar />
         {children}
         <Footer/>
