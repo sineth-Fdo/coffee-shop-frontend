@@ -26,8 +26,9 @@ const formSchema = z.object({
   description: z.string().min(2).max(50),
   category: z.string().min(2),
   stock: z.string().min(1),
-  image: z.instanceof(File).optional(),
+  image: z.any().optional(),
 });
+
 
 const CreateProductForm = () => {
 
@@ -49,7 +50,7 @@ const CreateProductForm = () => {
       const token = Cookies.get("token") as string;
   
       let imageUrl = "";
-      if (image) {
+      if (image && image instanceof File) {
         const imageId = uuidv4() as string;
         imageUrl = `${image.name}${imageId}` as string;
         const storageRef = ref(storage, `products/${imageUrl}`);
