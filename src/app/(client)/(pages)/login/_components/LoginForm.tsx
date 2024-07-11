@@ -41,7 +41,7 @@ const LoginForm = () => {
         router.push("/home");
       }
     }
-  }, []);
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

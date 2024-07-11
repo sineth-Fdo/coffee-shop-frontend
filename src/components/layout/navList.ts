@@ -12,16 +12,16 @@ export const navList : INavList[] = [
         link: `${role === "admin" ? "/dashboard" : "/home"}`
     },
     {
-        title: `${role === "admin" ? "Orders" : "shop"}`,
-        link: `${role === "admin" ? "/orders" : "/shop"}`
+        title: `${role === "admin" ? "Products" : "shop"}`,
+        link: `${role === "admin" ? "/shop" : "/shop"}`
     },
     {
-        title: `${role === "admin" ? "" : "Menu"}`,
-        link:  `${role === "admin" ? "" : "/home"}`
+        title: `${role === "admin" ? "orders" : "Menu"}`,
+        link:  `${role === "admin" ? "/orders" : "/home"}`
     },
     {
-        title: `${role === "admin" ? "" : "Contact"}`,
-        link: `${role === "admin" ? "" : "/contact"}`
+        title: `${role === "admin" ? "New Product" : "Contact"}`,
+        link: `${role === "admin" ? "/create" : "/contact"}`
     },
 
 ]

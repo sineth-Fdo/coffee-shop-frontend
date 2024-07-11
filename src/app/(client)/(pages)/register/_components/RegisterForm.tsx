@@ -76,7 +76,7 @@ const RegisterForm = () => {
         router.push("/home");
       }
     }
-  }, []);
+  });
 
   // styles
   const inputStyle = "border-gray-300 rounded-md w-[100%]";
