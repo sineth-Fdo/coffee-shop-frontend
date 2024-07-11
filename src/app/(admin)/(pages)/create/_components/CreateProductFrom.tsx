@@ -1,7 +1,4 @@
-"use client";
-
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,21 +16,18 @@ import Button from "@/src/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { createProduct } from "@/src/api/product/productAPI";
 import { storage } from "@/src/data/firebase/config";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { useState } from "react";
+import { ref, uploadBytes } from "firebase/storage";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   price: z.string().min(2).max(50),
   description: z.string().min(2).max(50),
   category: z.string().min(2),
-  stock: z.string().min(2),
+  stock: z.string().min(1),
   image: z.instanceof(File).optional(),
 });
 
 const CreateProductForm = () => {
-  const router = useRouter();
-  const [imageLink, setImageLink ] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,18 +45,18 @@ const CreateProductForm = () => {
     try {
       const { name, price, description, category, stock, image } = values;
       const token = Cookies.get("token") as string;
-
-
+  
+      let imageUrl = "";
       if (image) {
         const imageId = uuidv4() as string;
-        const imageUrl = `products/${image.name}${imageId}` as string;
-        const storageRef = ref(storage,imageUrl);
-        setImageLink(imageUrl);
+        imageUrl = `${image.name}${imageId}` as string;
+        const storageRef = ref(storage, `products/${imageUrl}`);
         await uploadBytes(storageRef, image);
+        
       }
-
-      const response = await createProduct(name, parseInt(price), description, category, parseInt(stock), imageLink, token);
-
+  
+      const response = await createProduct(name, parseInt(price), description, category, parseInt(stock), imageUrl, token);
+  
       if (response.ok) {
         console.log("success");
         form.reset();
@@ -118,7 +112,7 @@ const CreateProductForm = () => {
             )}
           />
           <div className="w-[30%]">
-          <Input type="file" className={inputStyle} onChange={handleFileChange} />
+            <Input type="file" className={inputStyle} onChange={handleFileChange} />
           </div>
           <FormField
             control={form.control}
