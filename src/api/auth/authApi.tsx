@@ -1,9 +1,8 @@
-import { ILogin, IRegister } from "@/src/types/api_types/authInterface";
 import { LOGIN_URL, REGISTER_URL } from "../api-urls";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export const loginUser = async ({ email, password }: ILogin) => {
+export const loginUser = async (email : string, password : string ) => {
   try {
     const response = await fetch(`${BASE_URL}${LOGIN_URL}`, {
       method: "POST",
@@ -20,13 +19,7 @@ export const loginUser = async ({ email, password }: ILogin) => {
   }
 };
 
-export const registerUser = async ({
-  username,
-  email,
-  password,
-  mobile,
-  role,
-}: IRegister) => {
+export const registerUser = async (username : string,email : string,password : string,mobile : number ,role : string) => {
   try {
     const response = await fetch(`${BASE_URL}${REGISTER_URL}`, {
       method: "POST",
