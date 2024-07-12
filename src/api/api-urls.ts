@@ -11,3 +11,6 @@ export const REGISTER_URL = "/register";
 
 // * create product URL
 export const CREATE_PRODUCT_URL = "/product/create-product";
+
+// * get all products URL
+export const GET_ALL_PRODUCTS_URL = "/product/all-products";
