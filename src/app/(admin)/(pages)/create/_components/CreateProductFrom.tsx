@@ -191,7 +191,7 @@ const CreateProductForm = () => {
                 <DialogHeader>
                   <DialogTitle>Add New Category</DialogTitle>
                   <DialogDescription>
-                    You can create new category here. Click Add when you're done.
+                    You can create new category here. Click Add when you&apos;re done.
                   </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-2 py-1">
