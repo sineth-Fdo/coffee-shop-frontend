@@ -19,11 +19,13 @@ const ProductsMain = () => {
 
   useEffect(() => {
     fetchAllProducts();
+    
   }, []);
 
   return (
     <div>
       <h1>Products</h1>
+
       <div>
         {products.map((product: any) => (
           <div key={product.id}>
