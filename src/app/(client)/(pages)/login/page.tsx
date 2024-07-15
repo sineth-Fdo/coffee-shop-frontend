@@ -17,7 +17,23 @@ const Page = () => {
                 
                 />
         </div>
+
         <div className="border w-[100%] sm:w-[70%] h-[100%] bg-[#fff]">
+          <div className=" w-[75vw] sm:w-[35vw] h-[40vh] absolute right-0">
+              <Image 
+                      src="/assets/coffee-fallen-left.png"
+                      alt="login"
+                      objectFit="contain"
+                      layout="fill"
+                      quality={100}
+                      style={
+                        {
+                          opacity: "0.4"
+                        }
+                      }
+                      
+                      />
+          </div>
             <LoginForm />
         </div>
     

@@ -5,6 +5,16 @@ import { navList } from './navList'
 import Button from '../ui/button'
 import Cookies from "js-cookie";
 import { useRouter } from 'next/navigation'
+import { IoCartOutline } from 'react-icons/io5'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import CartMain from '@/src/app/(client)/(pages)/_components/CartMain'
 
 const NavMenu = (props:any) => {
   const token = Cookies.get("token");
@@ -21,16 +31,24 @@ const NavMenu = (props:any) => {
           ))}
         </div>
       ) : props.navName === "small" ? (
-        <div className='flex flex-col w-[100%] h-screen bg-[#00000085] shadow top-0 lg:hidden relative items-center justify-center'>
+        <div className='flex flex-col mr-3 w-[70%] sm:w-[30%] h-auto py-5 rounded-lg bg-[#000000e7] shadow top-0 lg:hidden relative items-center justify-center transition duration-300'>
             {navList.map((item, index) => (
-                <Link href={item.link} key={index}>
-                    <h1 className="text-white text-2xl my-5">{item.title}</h1>
+                <Link 
+                onClick={props.onClick}
+                href={item.link} key={index}>
+                    <h1 className="text-white text-md my-4">{item.title}</h1>
                 </Link>
             ))}
+
+{
+                token && Cookies.get("role") === "customer" ? (
+                      <CartMain />
+                ) : null
+              }
             
             <Button 
                 name = {token ? "Logout" : "Login"}
-                className="hover:bg-[#795b30] bg-[#bd914e] hover:text-[#ffe6bf] transition duration-500 ease-in-out w-40 h-8"
+                className="hover:bg-[#795b30] bg-[#bd914e] mt-5 hover:text-[#ffe6bf] transition duration-500 ease-in-out w-40 h-8"
                 onClick={() => {
                     if (token) {
                         Cookies.remove("token");

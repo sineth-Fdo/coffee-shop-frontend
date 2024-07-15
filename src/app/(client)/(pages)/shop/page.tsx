@@ -9,7 +9,7 @@ const Page = () => {
 
   return (
     <div>
-        <div className="relative w-full h-screen overflow-hidden flex justify-center items-center">
+        <div className="relative w-full h-[50vh] lg:h-screen overflow-hidden flex justify-center items-center">
                 <MainImageText name="SHOP" />
                 <MainImage alt="shop-main-image" src="/assets/main2.jpg" />
             <div className="absolute inset-0 bg-black bg-opacity-50 "></div>
