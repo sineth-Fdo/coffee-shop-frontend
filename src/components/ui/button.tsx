@@ -1,7 +1,7 @@
 "use client";
 
 interface IButtonProps {
-  name: string;
+  name?: string;
   className?: string;
   width?: string;
   height?: string;
