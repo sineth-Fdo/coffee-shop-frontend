@@ -1,5 +1,5 @@
 
-import { CREATE_PRODUCT_URL, GET_ALL_PRODUCTS_URL } from "../api-urls";
+import { CREATE_PRODUCT_URL, GET_ALL_PRODUCTS_URL, GET_PRODUCT_BY_CATEGORY_URL } from "../api-urls";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -26,6 +26,23 @@ export const createProduct = async ( name : string, price : number, description 
 export const getAllProducts = async (token : string) => {
     try {
         const response = await fetch(`${BASE_URL}${GET_ALL_PRODUCTS_URL}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+        });
+
+        return response.json();
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
+export const getProductByCategory = async (token : string, category : string) => {
+    try {
+        const response = await fetch(`${BASE_URL}${GET_PRODUCT_BY_CATEGORY_URL}${category}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

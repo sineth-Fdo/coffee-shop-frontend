@@ -72,15 +72,15 @@ const LoginForm = () => {
   };
 
   // styles
-  const inputStyle = " border-gray-300 rounded-md w-[100%]";
+  const inputStyle = " border-gray-300 rounded-md w-[100%] bg-transparent";
   const labelStyle = "text-sm font-semibold text-gray-600";
 
 
   return (
-    <div className=" w-[100%] h-[100%] flex flex-col px-10 sm:px-20 lg:px-40 xl:px-60 justify-center">
+    <div className=" w-[100%] h-[100%] flex flex-col px-10 sm:px-20 lg:px-40 xl:px-60 justify-center relative z-10">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <h1 className="text-3xl font-semibold">Login</h1>
+                <h1 className="text-3xl font-semibold ">Login</h1>
                 <FormField
                   control={form.control}
                   name="email"
