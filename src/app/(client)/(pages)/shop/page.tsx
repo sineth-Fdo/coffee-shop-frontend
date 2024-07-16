@@ -14,7 +14,7 @@ const Page = () => {
                 <MainImage alt="shop-main-image" src="/assets/main2.jpg" />
             <div className="absolute inset-0 bg-black bg-opacity-50 "></div>
         </div>
-        <div>
+        <div className='mb-20'>
             <ProductsMain />
         </div>
     </div>
