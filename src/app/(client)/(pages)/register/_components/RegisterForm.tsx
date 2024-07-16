@@ -10,7 +10,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -29,7 +28,7 @@ const formSchema = z.object({
       .refine((val) => /^\d{10}$/.test(val), {
         message: "Mobile number must be exactly 10 digits",
       }),
-    role: z.string().min(2),
+    role: z.any().optional(),
   });
 
 const RegisterForm = () => {
@@ -50,11 +49,10 @@ const RegisterForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
       
       try {
-            const { email, password, username, mobile, role } = values;
-            const res = await registerUser(username, email, password, parseInt(mobile, 10), role);
+            const { email, password, username, mobile } = values;
+            const res = await registerUser(username, email, password, parseInt(mobile, 10), "customer");
 
             if (res)
-            alert(res);
             console.log(res)
 
         }catch (err : any) {
@@ -142,20 +140,7 @@ const RegisterForm = () => {
                     </FormItem>
                   )}
                 />
-               
-                <FormField
-                  control={form.control}
-                  name="role"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className={labelStyle}>Role</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter your role" className={inputStyle} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              
                   <Button
                       name="Register"
                       className="w-[100%] h-10 text-[#000000bc] hover:bg-[#ffe6bf] bg-[#F9C06A] hover:text-[#000] transition duration-500 ease-in-out mt-7"
