@@ -27,3 +27,12 @@ export const CREATE_CATEGORY_URL = "/category/create-category";
 // * get all categories URL
 export const GET_ALL_CATEGORIES_URL = "/category/get-categories";
 
+
+//-----------------------Cart-----------------------
+
+// * add to cart URL
+export const ADD_TO_CART_URL = "/cart/add-to-cart/";
+
+// * get cart items URL
+export const GET_CART_ITEMS_URL = "/cart/get-cart";
+
