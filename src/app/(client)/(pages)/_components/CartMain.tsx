@@ -48,7 +48,7 @@ const CartMain = () => {
             <div className="border border-[red] w-[100%] h-[90vh] relative">
               <ScrollArea className="w-[100%] h-[80%]">
                 {cartItems.map((item : any) => (
-                  <div className="border border-[green] w-[100%] h-[130px] flex justify-center items-center my-4">
+                  <div key={item._id} className="border border-[green] w-[100%] h-[130px] flex justify-center items-center my-4">
                     <div className="border w-[30%] h-[100%] relative">
                       <Image
                         src={`${process.env.NEXT_PUBLIC_FIREBASE_IMAGE_URL_1}${item.product.image}${process.env.NEXT_PUBLIC_FIREBASE_IMAGE_URL_2}`}
