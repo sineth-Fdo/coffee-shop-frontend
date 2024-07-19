@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { addToCart } from "@/src/api/product/cartAPI";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -20,6 +21,18 @@ const ProductCard = (props: any) => {
 
   const [token, setToken] = useState("");
   const [role, setRole] = useState("");
+
+  const handleAddToCart = async (product_id : string) => {
+    const token = Cookies.get("token") as string;
+
+    try {
+      const response = await addToCart(token, product_id);
+      console.log(response);
+    }catch(error:any){
+      console.log(error);
+    }
+
+  };
 
   useEffect(() => {
     const token = Cookies.get("token") as string;
@@ -86,8 +99,8 @@ const ProductCard = (props: any) => {
                         </button>
                       ) : (
                         <button
-                          onClick={() => console.log("Add to cart")}
-                          className="w-[40%] h-[40px] flex justify-center items-center bg-[#603809] hover:bg-[#d1a158] text-white rounded-xl shadow-lg transition duration-500 ease-in-out"
+                        onClick={() => handleAddToCart(product._id)}
+                        className="w-[40%] h-[40px] flex justify-center items-center bg-[#603809] hover:bg-[#d1a158] text-white rounded-xl shadow-lg transition duration-500 ease-in-out"
                         >
                           <IoCartOutline className="text-[#ffffff] text-2xl hover:text-[#ffffffb0] hover:text-md transition duration-500 ease-in-out" />
                         </button>
