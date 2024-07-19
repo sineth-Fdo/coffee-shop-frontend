@@ -36,3 +36,6 @@ export const ADD_TO_CART_URL = "/cart/add-to-cart/";
 // * get cart items URL
 export const GET_CART_ITEMS_URL = "/cart/get-cart";
 
+// * remove cart item URL
+export const REMOVE_CART_ITEM_URL = "/cart/delete-item/";
+
