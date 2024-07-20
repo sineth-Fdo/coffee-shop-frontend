@@ -17,6 +17,8 @@ import Lottie from "lottie-react";
 import EmptyCart from "@/src/data/lottie/Empty-cart-animation.json";
 import { IoCartOutline } from "react-icons/io5";
 import { TiDeleteOutline } from "react-icons/ti";
+import Button from "@/src/components/ui/button";
+import Link from "next/link";
 
 interface CartMainProps {
   cartSide?: string;
@@ -74,13 +76,17 @@ const CartMain = (props : CartMainProps) => {
               <ScrollArea className="w-[100%] h-[80%]">
                 {
                   cartItems.length === 0 ? (
-                    <div className="border w-[100%] h-[60vh] flex justify-center items-center">
+                    <div className=" w-[100%] h-[60vh] flex flex-col justify-center items-center">
                       <Lottie 
                         animationData={EmptyCart} 
                         loop={false}
                         autoplay={true}
                         className="w-[50%] h-[50%]"
                       />
+                      <Link
+                        href="/shop"
+                        className="text-[#bd914e] text-sm hover:text-[#725326] hover:underline transition duration-500 ease-in-out"
+                      >Shop Now</Link>
                     </div>
                   ) : cartItems.map((item : any) => (
                     <div key={item._id} className=" shadow-lg w-[100%] h-[130px] rounded-md bg-gradient-to-r from-[#c4711f] to-[#2c2117] md:h-[130px] flex justify-center items-center my-4">
@@ -96,7 +102,7 @@ const CartMain = (props : CartMainProps) => {
                       <div className=" w-[55%] h-[100%] px-2 pt-2 flex flex-col justify-start items-start">
                         <h1 className="text-md sm:text-lg text-[#fff]">{item.product.name}</h1>
                         <h1 className="text-sm text-[#fff]"> Price : {item.itemPrice}</h1>
-                        <h1 className="text-sm text-[#fff]">{item.quantity}</h1>
+                        <h1 className="text-sm text-[#ffffffa8]"><span className="mr-1 text-sm ">X</span>{item.quantity}</h1>
                       </div>
                       <div 
                       onClick={() => removeCartItem(item._id)}
@@ -108,8 +114,18 @@ const CartMain = (props : CartMainProps) => {
                 }
 
               </ScrollArea>
-              <div className="border border-[blue] w-[100%] h-[20%]">
-                <h1>{cartTotal}</h1>
+              <div className=" w-[100%] h-[20%] flex flex-col">
+                <div className=" w-[100%] h-[50%] flex justify-between px-7 items-center">
+                  <h1 className="text-lg sm:text-xl">TOTAL</h1>
+                  <h1 className="text-lg sm:text-xl text-[#725326]">LKR {cartTotal}</h1>
+                </div>
+                <div className=" w-[100%] h-[40%] flex justify-center items-center pr-3 ">
+                    <Button 
+                    name = "ORDER NOW"
+                    className=" text-[#fff] hover:bg-[#bd914e]  bg-[#bd914e] transition duration-500 ease-in-out w-[90%] h-8"
+                    onClick={() => {}}
+                    />
+                </div>
               </div>
             </div>
           </SheetDescription>

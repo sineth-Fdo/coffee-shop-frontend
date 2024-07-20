@@ -2,9 +2,9 @@ import { ADD_TO_CART_URL, GET_CART_ITEMS_URL, REMOVE_CART_ITEM_URL } from "../ap
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export const addToCart = async (token: string, product_id: string) => {
+export const addToCart = async (token: string, product_id: string, quantity : number) => {
     try {
-        const response = await fetch(`${BASE_URL}${ADD_TO_CART_URL}${product_id}`, {
+        const response = await fetch(`${BASE_URL}${ADD_TO_CART_URL}${product_id}/${quantity}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
