@@ -21,13 +21,28 @@ const ProductCard = (props: any) => {
 
   const [token, setToken] = useState("");
   const [role, setRole] = useState("");
+  const [quantity, setQuantity] = useState(1);
+
+
+  const handleQuantity = (type: string) => {
+      
+    if (type === "increment") {
+      if (quantity < 10)
+      setQuantity(quantity + 1);
+    }else {
+      if (quantity !== 1 ) 
+      setQuantity(quantity - 1);
+    }
+  };
+
 
   const handleAddToCart = async (product_id : string) => {
     const token = Cookies.get("token") as string;
 
     try {
-      const response = await addToCart(token, product_id);
+      const response = await addToCart(token, product_id, quantity);
       console.log(response);
+      setQuantity(1);
     }catch(error:any){
       console.log(error);
     }
@@ -66,15 +81,28 @@ const ProductCard = (props: any) => {
                   <DialogTitle className="text-2xl text-[#603809]">
                     <div className="flex flex-col">
                       {product.name}
-                      <p className="text-sm text-[#008000a4] flex gap-2 justify-start items-center">
-                        <GiCoffeeBeans className="text-[#000] text-2xl hover:text-[#ffffffb0] hover:text-md transition duration-500 ease-in-out" />
+                      <p className=" text-sm text-[#008000a4] flex gap-2 justify-start items-center">
+                        <GiCoffeeBeans className="text-[#000] text-2xl hover:text-md transition duration-500 ease-in-out" />
                         {product.stock}
+                        <p className="text-sm text-[#000000d2] ml-4">
+                          Category : {product.category}
+                        </p>
                       </p>
                     </div>
                   </DialogTitle>
-                  <DialogDescription></DialogDescription>
+                  <DialogDescription>
+                    <div className=" w-[100%] py-1 flex gap-2 text-center">
+                      <button
+                        onClick={() => handleQuantity("decrement")}
+                        className={` font-extrabold w-[20%] py-1 rounded-md  ${quantity === 1 ? "bg-[#6037096f] " : "bg-[#603809]"} text-[#fff] active:bg-[#6037096f] `}>-</button>
+                      <div className=" w-[40%] font-extrabold py-1">{quantity}</div>
+                      <button 
+                        onClick={() => handleQuantity("increment")}
+                        className={` w-[20%] font-extrabold py-1 rounded-md bg-[#603809] text-[#fff] active:bg-[#603709a3] ${quantity === 10 ? "bg-[#6037096f] " : "bg-[#603809]"}`}>+</button>
+                    </div>
+                  </DialogDescription>
                 </DialogHeader>
-                <div className="w-[100%] h-[90%]">
+                <div className=" w-[100%] h-[90%]">
                   <div className="w-[100%] h-[60%] relative overflow-hidden rounded-xl cursor-pointer">
                     <Image
                       src={`${process.env.NEXT_PUBLIC_FIREBASE_IMAGE_URL_1}${product.image}${process.env.NEXT_PUBLIC_FIREBASE_IMAGE_URL_2}`}
@@ -88,9 +116,10 @@ const ProductCard = (props: any) => {
                     <p className="text-md text-[#000000d2] pt-3">
                       {product.description}
                     </p>
+                    <div></div>
                     <div className="w-[100%] flex justify-between">
                       <p className="text-4xl text-[#603809] font-bold">
-                        LKR {product.price}
+                        LKR {product.price * quantity}
                       </p>
 
                       {token && role === "admin" ? (
