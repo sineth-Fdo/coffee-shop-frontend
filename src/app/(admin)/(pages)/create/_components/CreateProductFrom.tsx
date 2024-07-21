@@ -26,6 +26,7 @@ import {Dialog,DialogContent,DialogDescription,DialogFooter,DialogHeader,DialogT
 
 import { useEffect, useState } from "react";
 import { createCategory, getAllCategories } from "@/src/api/product/categoryAPI";
+import CoffeeLoader from "@/src/components/ui/CoffeeLoader";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -41,6 +42,7 @@ const CreateProductForm = () => {
   const [selectedTheme, setSelectedTheme] = useState("coffee");
   const [categoryName, setCategoryName] = useState("");
   const [categories, setCategories] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,6 +57,7 @@ const CreateProductForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      setOpen(true);
       const { name, price, description, stock, image } = values;
       const token = Cookies.get("token") as string;
   
@@ -73,6 +76,7 @@ const CreateProductForm = () => {
         console.log("success");
         form.reset();
         setSelectedTheme("coffee");
+        setOpen(false);
       } else {
         console.log("error");
       }
@@ -120,6 +124,7 @@ const CreateProductForm = () => {
 
   return (
     <div className="w-[100%] h-[100%] flex flex-col px-10 sm:px-20 lg:px-40 xl:px-60 justify-center">
+      <CoffeeLoader open={open} loadingName = "Uploading . . ."/>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <h1 className="text-3xl font-semibold">Add New Product</h1>
