@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { poppins } from "../styles/fonts";
 import "../styles/globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Toaster } from "@/components/ui/toaster"
 
 import Navbar from "../components/layout/navbar";
 import Footer from "../components/layout/footer/Footer";
@@ -24,6 +25,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer/>
+        <Toaster />
         </body>
     </html>
   );

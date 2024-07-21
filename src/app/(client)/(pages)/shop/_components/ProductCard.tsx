@@ -11,13 +11,19 @@ import {
 import { addToCart } from "@/src/api/product/cartAPI";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import { IoMdDoneAll } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { GiCoffeeBeans } from "react-icons/gi";
 import { IoCartOutline } from "react-icons/io5";
 import { MdModeEdit } from "react-icons/md";
+import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from "@radix-ui/react-toast";
+import Link from "next/link";
+
 
 const ProductCard = (props: any) => {
   const { products } = props;
+  const { toast } = useToast();
 
   const [token, setToken] = useState("");
   const [role, setRole] = useState("");
@@ -43,6 +49,23 @@ const ProductCard = (props: any) => {
       const response = await addToCart(token, product_id, quantity);
       console.log(response);
       setQuantity(1);
+      toast({
+        title: `${response.message}`,
+        action: 
+        <ToastAction altText="Try again">
+          {
+            response.message === "Product added to cart successfully" ? (
+              <IoMdDoneAll className="text-[#fff] text-2xl hover:text-md transition duration-500 ease-in-out" />  
+            ) : (
+                <Link href="/shop">
+                  <h1 className="text-[#fff] text-sm hover:text-[#ffffff96] transition duration-500 ease-in-out">Go to Cart</h1>
+                </Link>
+            )
+          }
+        </ToastAction>,
+        className: `border-none ${response.message === "Product added to cart successfully" ? "bg-[#008000]" : "bg-[#725326]" } text-[#fff]  hover:text-md transition duration-500 ease-in-out`,
+
+      })
     }catch(error:any){
       console.log(error);
     }
@@ -65,7 +88,16 @@ const ProductCard = (props: any) => {
           className="w-[300px] h-[300px] flex flex-col justify-center items-center shadow-lg rounded-xl cursor-default"
         >
           <div className="w-[90%] h-[90%]">
-            <Dialog>
+            <Dialog 
+            onOpenChange={
+              (isOpen) => {
+                if (!isOpen) {
+                  setQuantity(1);
+                }
+              }
+            }
+            
+            >
               <DialogTrigger className="w-[100%] h-[60%] relative overflow-hidden rounded-xl cursor-pointer">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_FIREBASE_IMAGE_URL_1}${product.image}${process.env.NEXT_PUBLIC_FIREBASE_IMAGE_URL_2}`}
@@ -76,7 +108,7 @@ const ProductCard = (props: any) => {
                   className="transition-transform duration-500 ease-in-out hover:scale-110"
                 />
               </DialogTrigger>
-              <DialogContent className="w-[100%] h-[70%] flex flex-col justify-start items-start">
+              <DialogContent className="w-[100%] h-[80%] bg-[#ffffff] flex flex-col justify-start items-start">
                 <DialogHeader>
                   <DialogTitle className="text-2xl text-[#603809]">
                     <div className="flex flex-col">
@@ -91,15 +123,21 @@ const ProductCard = (props: any) => {
                     </div>
                   </DialogTitle>
                   <DialogDescription>
-                    <div className=" w-[100%] py-1 flex gap-2 text-center">
-                      <button
-                        onClick={() => handleQuantity("decrement")}
-                        className={` font-extrabold w-[20%] py-1 rounded-md  ${quantity === 1 ? "bg-[#6037096f] " : "bg-[#603809]"} text-[#fff] active:bg-[#6037096f] `}>-</button>
-                      <div className=" w-[40%] font-extrabold py-1">{quantity}</div>
-                      <button 
-                        onClick={() => handleQuantity("increment")}
-                        className={` w-[20%] font-extrabold py-1 rounded-md bg-[#603809] text-[#fff] active:bg-[#603709a3] ${quantity === 10 ? "bg-[#6037096f] " : "bg-[#603809]"}`}>+</button>
-                    </div>
+
+                    {
+                      token && role === "customer" ? (
+                        <div className=" w-[100%] py-1 flex gap-2 text-center">
+                          <button
+                            onClick={() => handleQuantity("decrement")}
+                            className={` font-extrabold w-[20%] py-1 rounded-md  ${quantity === 1 ? "bg-[#6037096f] " : "bg-[#603809]"} text-[#fff] active:bg-[#6037096f] `}>-</button>
+                          <div className=" w-[40%] font-extrabold py-1">{quantity}</div>
+                          <button 
+                            onClick={() => handleQuantity("increment")}
+                            className={` w-[20%] font-extrabold py-1 rounded-md bg-[#603809] text-[#fff] active:bg-[#603709a3] ${quantity === 10 ? "bg-[#6037096f] " : "bg-[#603809]"}`}>+</button>
+                        </div>
+                      ) : null
+                    }
+                    
                   </DialogDescription>
                 </DialogHeader>
                 <div className=" w-[100%] h-[90%]">
