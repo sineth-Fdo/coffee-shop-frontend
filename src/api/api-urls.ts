@@ -39,3 +39,18 @@ export const GET_CART_ITEMS_URL = "/cart/get-cart";
 // * remove cart item URL
 export const REMOVE_CART_ITEM_URL = "/cart/delete-item/";
 
+
+//-----------------------Order-----------------------
+
+// * create order URL
+export const CREATE_ORDER_URL = "/order/add-order";
+
+// * get all orders URL
+export const GET_ALL_ORDERS_URL = "/order/get-all-orders";
+
+// * get order by id URL
+export const GET_ORDER_BY_ID_URL = "/order/get-order/";
+
+// * delete order status URL
+export const DELETE_ORDER_URL = "/order/delete-order/";
+
