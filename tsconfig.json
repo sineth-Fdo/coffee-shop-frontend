@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.ts", "src/components/layout/nav/NavMenu.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.ts", "src/components/layout/nav/NavMenu.tsx", "src/app/(admin)/(pages)/orders/[orderId]"],
   "exclude": ["node_modules"]
 }
