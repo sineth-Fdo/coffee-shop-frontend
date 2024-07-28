@@ -19,6 +19,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { TiDeleteOutline } from "react-icons/ti";
 import Button from "@/src/components/ui/button";
 import Link from "next/link";
+import { createOrderAPI } from "@/src/api/product/orderAPI";
 
 interface CartMainProps {
   cartSide?: string;
@@ -38,6 +39,17 @@ const CartMain = (props : CartMainProps) => {
       console.log(response.data.cart);
       setCartItems(response.data.cart);
       setCartTotal(response.data.total);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createOrder = async () => {
+    const token = Cookies.get("token");
+    try {
+      const response = await createOrderAPI(token as string);
+      console.log(response);
+      getCart();
     } catch (error) {
       console.log(error);
     }
@@ -123,7 +135,7 @@ const CartMain = (props : CartMainProps) => {
                     <Button 
                     name = "ORDER NOW"
                     className=" text-[#fff] hover:bg-[#bd914e]  bg-[#bd914e] transition duration-500 ease-in-out w-[90%] h-8"
-                    onClick={() => {}}
+                    onClick={createOrder}
                     />
                 </div>
               </div>
