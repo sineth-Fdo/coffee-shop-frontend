@@ -7,11 +7,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useRouter } from "next/navigation";
 
 const TableMain = (props: any) => {
-  const { orders } = props;
-  const router = useRouter();
+  const { orders, deleteOnclick } = props;
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -62,6 +60,12 @@ const TableMain = (props: any) => {
                   className="px-4 py-2 rounded-md cursor-pointer bg-[#d49f4e] hover:bg-[#603809] text-[#fff] transition duration-150"
                 >
                   Details
+                </button>
+                <button 
+                  onClick={deleteOnclick.bind(null, order._id)}
+                  className="px-4 py-2 rounded-md cursor-pointer bg-[#de3a3a] hover:bg-[#603809] text-[#fff] transition duration-150"
+                >
+                  Reject
                 </button>
               </TableCell>
             </TableRow>
